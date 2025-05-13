@@ -17,6 +17,25 @@
 
 ## Multimodal Content Production Pipeline​
 
+### ​Cross-Language Creative Generation
+
+- **​​LLM-Based Copywriting​**​: Deploy a fine-tuned multilingual LLM (e.g., [Qwen3](https://huggingface.co/Qwen) with adapter modules for "Belt and Road" languages) to generate culturally adapted ad copies:
+
+```python
+  # Pseudo-code for multilingual copy generation  
+  def generate_ad_copy(keywords, target_lang, cultural_context):  
+      prompt = f"<your_prompt_template> on {target_lang}, {keywords} and {cultural_context}"  
+      return llm_inference(prompt, adapter=target_lang)  
+```
+
+**LLaMA-Factory for Easy and Efficient LLM Fine-tuning**: [https://github.com/hiyouga/LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)
+
+<table>
+  <tr>
+    <td><img src="./_assets/llama-factory_compare.png" width="500"></td>
+    <td><img src="./_assets/llama-factory%20architecture.png" width="330"></td>
+  </tr>
+</table>
 
 
 ---
@@ -27,7 +46,7 @@
 
 ---
 
-## ​​ROI Prediction Model with Explainable AI​\
+## ​​ROI Prediction Model with Explainable AI​
 
 
 
