@@ -1,7 +1,7 @@
 # Cross-Border Digital Marketer
 
 **Integrated Framework for Cross-Border Digital Marketing Automation**  
-*Establish an AI-driven system that integrates [multimodal content generation](#multimodal-content-production-pipeline), [dynamic cross-platform allocation](#intelligent-allocation-optimization-system), and [ROI prediction](#roi-prediction-model-with-explainable-ai) to address **inefficiencies in multilingual creative production** and delayed strategy adaptation.*
+*"Establish an AI-driven system that integrates [multimodal content generation](#multimodal-content-production-pipeline), [dynamic cross-platform allocation](#intelligent-allocation-optimization-system), and [ROI prediction](#roi-prediction-model-with-explainable-ai) to address **inefficiencies in multilingual creative production** and delayed strategy adaptation."*
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red?logo=pytorch)](https://pytorch.org)
