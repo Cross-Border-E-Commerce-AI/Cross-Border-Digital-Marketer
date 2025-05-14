@@ -155,7 +155,7 @@ The regret $\rho$ after $T$ rounds is defined as the expected difference between
 
 $$\rho = T\mu^* - \sum_{t=1}^{T} \hat{r}_t,$$
 
-where $\mu^{*}$ is the maximal reward mean, $\mu^{*} = \max_{k}\{\mu_k\}$, and $\hat{r}_t$ is the reward in round t.
+where $\mu^{\star}$ is the maximal reward mean, $\mu^{\star} = \max_{k}\{\mu_k\}$, and $\hat{r}_t$ is the reward in round t.
 
 **(1) Arms: Ad creatives clustered by similarity (CLIP embeddings + topic modeling)**
 
