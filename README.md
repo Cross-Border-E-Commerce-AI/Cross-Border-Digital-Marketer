@@ -79,7 +79,25 @@ llamafactory-cli train/chat/export  <path_to_your_yaml_config_file> | llamafacto
 
 ### Quality Control via Multimodal Alignment
 
-**(1) ​Cross-Modal Consistency Check**: Align generated text and visuals using CLIP-score metrics to ensure semantic coherence.
+**(1) ​Cross-Modal Consistency Check**: Align generated text and visuals using **CLIP-score metrics** to ensure **semantic coherence**.
+- **CLIP (Contrastive Language-Image Pretraining)**: a pre-trained vision-language model that maps both text and images into a *unified semantic embedding space*.
+- The **CLIP Score** is a pivotal metric for assessing the **alignment between images and text prompts**, focusing on *semantic coherence rather than aesthetic quality*. 
+- **Alternative evaluation metrics**: [*T2IScore* (arXiv:2404.04251)](https://arxiv.org/abs/2404.04251) and [*VIEScore* (arXiv:2312.14867v1)](https://arxiv.org/html/2312.14867v1)
+
+
+[*"CLIPScore:A Reference-free Evaluation Metric for Image Captioning"* arXiv:2104.08718 [cs.CV]](https://arxiv.org/abs/2104.08718)
+
+$$\text{CLIP-S}(\mathbf{c},\mathbf{v})=w*\max (\cos (\mathbf{c},\mathbf{v}),0)$$
+
+$$\text{RefCLIP-S}(\mathbf{c}, \mathbf{R}, \mathbf{v}) = \text{H-Mean}(\text{CLIP-S}(\mathbf{c}, \mathbf{v}), \max_{r \in \mathbf{R}}(\max \cos(\mathbf{c}, \mathbf{r}), 0))$$
+
+<table>
+  <tr>
+    <td><img src="./_assets/clip.png" width="450"></td>
+    <td><img src="./_assets/clip_table.png" width="400"></td>
+  </tr>
+</table>
+
 ```python
   # Pseudo-code for CLIP score calculation  
   def calculate_clip_score(text, image):  
@@ -88,7 +106,13 @@ llamafactory-cli train/chat/export  <path_to_your_yaml_config_file> | llamafacto
       return cosine_similarity(text_features, image_features)  
 ```
 
-**(2) ​​A/B Testing Interface**: Deploy human-in-the-loop validation for high-cost campaigns (e.g., geopolitical-sensitive content).
+*HuggingFace: Evaluating Diffusion Models*: [https://huggingface.co/docs/diffusers/conceptual/evaluation](https://huggingface.co/docs/diffusers/v0.33.1/conceptual/evaluation)
+
+**(2) ​​A/B Testing Interface**: Deploy **human-in-the-loop validation** for high-cost campaigns (*e.g., geopolitical-sensitive content*).
+- A/B testing is a method where two software variants are compared by evaluating the merit of the variants through exposure to the end-users of the system.
+(["*A/B testing: A systematic literature review*"](https://doi.org/10.1016/j.jss.2024.112011))
+
+![A/B Test](./_assets/ab_test.png)
 
 ```python
   # Pseudo-code for A/B testing interface  
@@ -100,12 +124,62 @@ llamafactory-cli train/chat/export  <path_to_your_yaml_config_file> | llamafacto
       return analyze_results(results)  
 ```
 
-
 ---
 
 ## Intelligent Allocation Optimization System​
 
+### Genetic Algorithm (GA) Optimization:
+In computer science, [**genetic algorithms**](https://en.wikipedia.org/wiki/Genetic_algorithm) are commonly used to generate high-quality solutions to *optimization and search problems* via biologically inspired operators such as *selection, crossover, and mutation*.
+- *Genes*: Ad elements (headline, image style, CTA color).
+- *Fitness Function*: Weighted sum of CTR (40%), CVR (30%), and ROAS (30%).
+- *Crossover/Mutation*: Use SBX (Simulated Binary Crossover) for continuous variables (e.g., color hues) and uniform mutation for discrete elements.
 
+![](./_assets/GA.png)
+
+```python
+  # Pseudo-code for GA-based ad optimization  
+  population = initialize_population(ad_elements)  
+  for generation in generations:  
+      fitness = evaluate(population, metrics=[CTR, CVR, ROAS])  
+      parents = tournament_selection(fitness)  
+      offspring = crossover(parents) + mutation(parents)  
+      population = survivors_selection(parents + offspring)  
+```
+
+### Bayesian Multi-Armed Bandit (MAB)​​ for Real-Time Traffic Allocation​​
+*"Adapts to sudden platform policy changes (e.g., TikTok algorithm updates) 2.3x faster than Q-learning baselines."*
+
+The [**multi-armed bandit (MAB)**](https://en.wikipedia.org/wiki/Multi-armed_bandit) can be asserted as a set of real distributioins $B=\{R_1,...,R_K\}$ where each distribution being associated with the rewards delivered by one of the $K \in \mathbb {N} ^{+}$ levers. Let $\mu_1,...,\mu_K$ be the mean values associated with these reward distributions. The goal of the MAB problem is to maximize the expected reward over a finite time horizon $T$ by selecting one arm at each time step $t \in \{1,...,T\}$.
+
+The regret $\rho$ after $T$ rounds is defined as the expected difference between the reward sum associated with an optimal strategy and the sum of the collected rewards:
+
+$$\rho = T\mu^* - \sum_{t=1}^{T} \hat{r}_t,$$
+
+where $\mu^*$ is the maximal reward mean, $\mu^* = \max_{k}\{\mu_k\}$, and $\hat{r}_t$ is the reward in round t.
+
+**(1) Arms: Ad creatives clustered by similarity (CLIP embeddings + topic modeling)**
+
+- [*"A Visual Structural Topic Model with Pretrained Image Embeddings"* (arXiv:2504.10004 [cs.CV])](https://arxiv.org/abs/2504.10004)
+
+- Given the dataset consists of $N$ images, with each represented by an embedding vector $\mathbf{z}_{i} \in \mathbb{R}^D$, and the covariates $\mathbf{x}_i \in \mathbb{R}^P$ influence the prevalence of visual topics. Model each image embedding $\mathbf{z}_{i}$ as normally distributed and generated by a mixture of $K$ topics:
+$$\mathbf{z}_{i} \sim \mathcal{N}(\sum_{k=1}^{K} \theta_{i,k} \mathbf{\beta}_{k}, \Sigma_{k}),$$
+- where $\theta_{i,k}$ is the topic proportion for image $i$ and $\mathbf{\beta}_{k}$ is the mean vector of topic $k$. The covariance matrix $\Sigma_{k}$ captures the within-topic variance.
+
+![vSTM](./_assets/vSTM.png)
+
+
+
+**(2) Reward: Thompson sampling with Beta posterior updating based on hourly CTR/CVR**
+
+- [*"Generalized Regret Analysis of Thompson Sampling using
+Fractional Posteriors"* (	arXiv:2309.06349 [stat.ML])](https://arxiv.org/abs/2309.06349)
+- $\alpha$-TS is a variant of Thompson Sampling that uses a *fractional posterior distribution* to sample from the action space. The algorithm is designed to balance exploration and exploitation in a more efficient manner than traditional Thompson Sampling methods.
+- the instance-dependent $\mathcal{O} (\sum_{k \neq i} * \Delta_k (\frac{log(T)}{C(\alpha)\Delta_k^2} + \frac{1}{2}))$ and instance-independent $\mathcal{O}(\sqrt{KT\log{K}})$ frequentist regret bounds under very mild conditions on the prior and reward distributions, where $\Delta_k$ is the gap between the true mean rewards of the $k^{th}$ and the best arms, and $C(\alpha)$ is a known constant.
+![aTS-algorithm](./_assets/aTS-algorithm.png)
+
+### Validation Protocol​​
+1. **Offline Simulation**​​: Replay historical logs to compare GA + MAB against rule-based allocation.
+2. **Online Metrics​**​: Monitor convergence speed (time to 95% optimal allocation) and regret minimization.
 
 ---
 
