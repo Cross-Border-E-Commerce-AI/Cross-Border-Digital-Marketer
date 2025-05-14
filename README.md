@@ -149,13 +149,13 @@ In computer science, [**genetic algorithms**](https://en.wikipedia.org/wiki/Gene
 ### Bayesian Multi-Armed Bandit (MAB)​​ for Real-Time Traffic Allocation​​
 *"Adapts to sudden platform policy changes (e.g., TikTok algorithm updates) 2.3x faster than Q-learning baselines."*
 
-The [**multi-armed bandit (MAB)**](https://en.wikipedia.org/wiki/Multi-armed_bandit) can be asserted as a set of real distributioins $B=\{R_1,...,R_K\}$ where each distribution being associated with the rewards delivered by one of the $K \in \mathbb {N} ^{+}$ levers. Let $\mu_1,...,\mu_K$ be the mean values associated with these reward distributions. The goal of the MAB problem is to maximize the expected reward over a finite time horizon $T$ by selecting one arm at each time step $t \in \{1,...,T\}$.
+The [**multi-armed bandit (MAB)**](https://en.wikipedia.org/wiki/Multi-armed_bandit) can be asserted as a set of real distributioins $B=\{{R_1,...,R_K}\}$ where each distribution being associated with the rewards delivered by one of the $K \in \mathbb {N} ^{+}$ levers. Let $\mu_1,...,\mu_K$ be the mean values associated with these reward distributions. The goal of the MAB problem is to maximize the expected reward over a finite time horizon $T$ by selecting one arm at each time step $t \in \{{1,...,T}\}$.
 
 The regret $\rho$ after $T$ rounds is defined as the expected difference between the reward sum associated with an optimal strategy and the sum of the collected rewards:
 
 $$\rho = T\mu^* - \sum_{t=1}^{T} \hat{r}_t,$$
 
-where $\mu^*$ is the maximal reward mean, $\mu^* = \max_{k}\{\mu_k\}$, and $\hat{r}_t$ is the reward in round t.
+where $\mu^{*}$ is the maximal reward mean, $\mu^{*} = \max_{k}\{\mu_k\}$, and $\hat{r}_t$ is the reward in round t.
 
 **(1) Arms: Ad creatives clustered by similarity (CLIP embeddings + topic modeling)**
 
