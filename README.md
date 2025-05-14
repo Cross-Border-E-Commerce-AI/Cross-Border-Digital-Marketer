@@ -187,6 +187,14 @@ Fractional Posteriors"* (	arXiv:2309.06349 [stat.ML])](https://arxiv.org/abs/230
 
 ## ​​ROI Prediction Model with Explainable AI​
 
+### Model Architecture
+
+**(1) Feature Engineering on Ad Creative Features**:
+
+ $$CLIP\_ Embeddings [512D] + Style\_ Transfer\_ Intensity [Gram\_ matrix\_ difference]$$
+
+
+**(2) XGBoost Regression**: 
 
 
 ---
