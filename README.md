@@ -193,6 +193,14 @@ Fractional Posteriors"* (	arXiv:2309.06349 [stat.ML])](https://arxiv.org/abs/230
 
  $$CLIP\_ Embeddings [512D] + Style\_ Transfer\_ Intensity [Gram\_ matrix\_ difference]$$
 
+ ["*Diversified Arbitrary Style Transfer via Deep Feature Perturbation*" arXiv:1909.08223v3 [cs.CV] ](https://arxiv.org/pdf/1909.08223)
+
+Informally, a style can be regarded as a family of visual attributes represented by a set of feature maps. The Gram matrix is a way to represent the correlations between different feature maps in a convolutional neural network (CNN). It captures the style of an image by measuring the correlations between the different channels of the feature maps. The Gram matrix is computed as follows:
+$$G_{ij} = \sum_{k=1}^{N} F_{ik}F_{jk}$$
+where $F_{ik}$ is the $k^{th}$ feature map of the $i^{th}$ image, and $N$ is the number of feature maps. The Gram matrix captures the correlations between different feature maps, which can be used to represent the style of the image.
+
+![Style Transfer Level](./_assets/style_transfer.png)
+
 
 **(2) XGBoost Regression**: 
 
