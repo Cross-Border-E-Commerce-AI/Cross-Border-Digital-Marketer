@@ -195,7 +195,7 @@ Fractional Posteriors"* (	arXiv:2309.06349 [stat.ML])](https://arxiv.org/abs/230
 
  ["*Diversified Arbitrary Style Transfer via Deep Feature Perturbation*" arXiv:1909.08223v3 [cs.CV] ](https://arxiv.org/pdf/1909.08223)
 
-Informally, a style can be regarded as a family of visual attributes represented by a set of feature maps. The Gram matrix is a way to represent the correlations between different feature maps in a convolutional neural network (CNN). It captures the style of an image by measuring the correlations between the different channels of the feature maps. The Gram matrix is computed as follows:
+Informally, a style can be regarded as a family of visual attributes represented by a set of *feature maps*. The **Gram matrix** is a way to represent the *correlations between different feature maps* in a convolutional neural network (`CNN`). It captures the style of an image by measuring **the correlations between the different channels of the feature maps**. The Gram matrix is computed as follows:
 
 $$G_{ij} = \sum_{k=1}^{N} F_{ik}F_{jk}$$
 
@@ -203,9 +203,33 @@ where $F_{ik}$ is the $k^{th}$ feature map of the $i^{th}$ image, and $N$ is the
 
 ![Style Transfer Level](./_assets/style_transfer.png)
 
+**(2) Feature Engineering on External Factors**: Competitor price trends (scraped) + macroeconomic indices.
 
-**(2) XGBoost Regression**: 
+- [tbd] (alternative refer: [Scraper APIs - Bright Data (亮数据)](https://github.com/Cross-Border-E-Commerce-AI/Cross-Cultural-Merchandising-Expert) on E-commerce price apis)
+- [tbd] (alternative refer: [CEIC API - ISI Emergin Markets](https://developer.isimarkets.com/zh/api-products/ceic/macroeconomic) or [WIND API - 中国金融数据服务平台](https://www.wind.com.cn/mobile/WDS/sapi/zh.html))
 
+**(3) XGBoost Regression**: Predict 7-day *ROAS* with quantile loss for interval estimation (*e.g., 80% CI of GMV*), with Bayesian optimization on prior distributions from similar markets.
+
+[**XGBoost (Extreme Gradient Boosting)**](https://xgboost.ai/) is a scalable distributed [gradient-boosted](https://en.wikipedia.org/wiki/Gradient_boosting) decision tree (GBDT) machine learning library. It provides parallel tree boosting and is the leading machine learning library for regression and classification.
+**Gradient Boosting Decision Trees (GBDT)** is a decision tree [ensemble learning algorithm](https://en.wikipedia.org/wiki/Ensemble_learning) similar to random forest. Ensemble learning algorithms combine multiple machine learning algorithms to obtain a better model.
+
+The **Bayes Optimal Classifier** is a probabilistic model that predicts the class of an instance by calculating the posterior probability of each class given the instance's features. The class with the highest posterior probability is chosen as the predicted class, which can be expressed as:
+
+$$y = \arg \max_{c_j \in C} \sum_{h_i \in H} P(c_j|h_i) P(h_i|T)$$
+
+![Ensemble Aggregation](./_assets/Ensemble_Aggregation.png)
+
+### Quantitative and Qulitative Evaluation
+
+- **Quantitative Evaluation**: Compare predicted *ROAS* with *actual GMV* using **MAE** and **RMSE** metrics.
+- **Qualitative Evaluation**: Use **SHAP (SHapley Additive exPlanations)** to explain model predictions and identify key features driving performance.
+
+```python
+  # Pseudo-code for SHAP value calculation  
+  explainer = shap.Explainer(model)  
+  shap_values = explainer(X_test)  
+  shap.summary_plot(shap_values, X_test)  
+```
 
 ---
 
