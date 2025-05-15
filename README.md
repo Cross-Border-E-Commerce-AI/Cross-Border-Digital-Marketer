@@ -235,7 +235,9 @@ $$y = \arg \max_{c_j \in C} \sum_{h_i \in H} P(c_j|h_i) P(h_i|T)$$
 
 ## System Integration & Performance Benchmarks​
 
-
+- **End-to-End Latency​**​: `<target_minutes>` from brief input to first creative deployment.
+- **​​Cost Reduction​**​: `<target_decrease>` in multilingual creative production costs vs. human agencies.
+- **ROI Lift**​​: `<target_improvement>` in *ROAS* across "Belt and Road" markets.
 
 ---
 
